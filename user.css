@@ -83,7 +83,7 @@
     border: 2px solid rgba(0, 0, 0, 0.397);
     border-radius: 10px;
     padding: 5px 10px;
-    width: 90%;
+    width: 50%;
     height: 30px;
     color: black;
 }
@@ -164,4 +164,29 @@
 }
 .rutas:hover{
     background-color: rgba(54, 54, 54, 0.678);
+}
+
+.OriginPlace, .DestinyPlace {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+}
+.DestinyPlace {
+    margin-top: 15px;
+    align-items: center;
+    justify-content: space-around;
+    gap: 25px;
+}
+.originButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 10px;
+}
+.waypointBtn {
+    width: 50px;
+    height: 50px;
+}
+#selectDestinyInMap {
+    width: 115px;
 }

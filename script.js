@@ -14,12 +14,23 @@ const fontMap = `
 const place = `
     <div class="place container">
         <div class="destino container" >
-            <h2 class="title">¿A donde iremos hoy?"</h2>
+            <h2 class="title">¿A donde iremos hoy?</h2>
+            <div class="OriginPlace">
+            <div class="originButtons">
+	        <button id="current-pos" class="waypointBtn"><i class="fa-solid fa-location-crosshairs"></i></button>
+	        <button id="origin" class="waypointBtn"><i class="fa-solid fa-location-arrow"></i></button>
+            </div>
             <input id="inputPlace1" class="inputPlace1" placeholder="Origen" required>
+	        </div>
+            <div class="DestinyPlace">
+	        <button id="destiny" class="waypointBtn"><i class="fa-solid fa-location-arrow"></i></button>
             <input id="inputPlace2" class="inputPlace2" placeholder="Destino" required>
+	        </div>
         </div>
         <div class="btnsPlace container">
             <button id="btn1" class="btn blue">Generar Recorrido</button>
+            <button id="finalize-route">Finalize route</button>
+
         </div>
 
     </div>
@@ -30,14 +41,14 @@ const place = `
 function render(documentHTML, innerHTML){
     documentHTML.innerHTML += innerHTML;
 }
-
 render(document.querySelector("body"),profileUser);
 render(document.querySelector("body"),fontMap);
 render(document.querySelector("body"),place);
 
+getPos();
+
 // Leaflet codigo
 var map = L.map('demo').setView([4.752231, -74.097953], 5);
-		
 var mapLink =
 '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 L.tileLayer(
@@ -49,24 +60,119 @@ maxZoom: 18,
 document.getElementById("btn1").addEventListener("click",()=> {
     var contenido1 = document.getElementById('inputPlace1').value;
     var contenido2 = document.getElementById('inputPlace2').value;
-  
-    var geocoder1 = L.Control.Geocoder.nominatim();
-    var geocoder2 = L.Control.Geocoder.nominatim();
-
-    geocoder1.geocode(contenido1, function(results1) {
-        var latlng1 = results1[0].center;
-    
-        geocoder2.geocode(contenido2, function(results2) {
-            var latlng2 = results2[0].center;
-    
-            var routing = L.Routing.control({
+    if ($('#inputPlace1').val().length == 0) {
+        actualRoute = L.Routing.control({
             waypoints: [
-                L.latLng(latlng1), 
-                L.latLng(latlng2)  
-            ],
-            })
-            routing.addTo(map);           
+                L.latLng(originMarker.getLatLng()),
+                L.latLng(destinyMarker.getLatLng())
+            ]
+        }).addTo(map);
+      } else {
+        geocoder1 = L.Control.Geocoder.nominatim();
+        geocoder2 = L.Control.Geocoder.nominatim();
+    
+        geocoder1.geocode(contenido1, function(results1) {
+            latlng1 = L.marker(results1[0].center).addTo(map);
+        
+            geocoder2.geocode(contenido2, function(results2) {
+                latlng2 = L.marker(results2[0].center).addTo(map);
+        
+                actualRoute = L.Routing.control({
+                    waypoints: [
+                        L.latLng(latlng1.getLatLng()),
+                        L.latLng(latlng2.getLatLng())
+                    ]
+                }).addTo(map);         
+            });
         });
-    });
-    map.setView(latlng, 13);
+        map.setView(latlng, 13);
+      }
 });
+
+
+// Route tracing with waypoints and actual position
+// Global variables
+var finalizeBtn = document.getElementById('finalize-route');
+var currentPosBtn = document.getElementById('current-pos');
+var destinyBtn = document.getElementById('destiny');
+var originBtn = document.getElementById('origin');
+var isCurrentPos = false;
+var isOrigin = false;
+var isDestiny = false;
+var latlng1= L.marker([0, 0]);
+var latlng2 = L.marker([0, 0]);
+var userLat;
+var userLng;
+var map;
+
+// Events
+originBtn.addEventListener('click', originActive);
+destinyBtn.addEventListener('click', DestinyActive);
+finalizeBtn.addEventListener('click', clearMap);
+currentPosBtn.addEventListener('click', currentPosActive);
+
+// Add main marker - optional, is just a reference
+var originMarker = L.marker([0, 0]);//4.650, -74.172
+var destinyMarker = L.marker([0, 0]);
+var geocoder1
+var geocoder2
+
+// Technical functions
+map.on('click',function (e) {
+    if (isOrigin) {
+        originMarker.remove();
+        originMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+    }else if (isDestiny) {
+        destinyMarker.remove();
+        destinyMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+    }else {
+        alert('Por favor seleccione qué tipo de punto está escogiendo (Origen o destino)');
+    }
+});
+
+function currentPosActive() {
+    if (userLat == null || userLat == undefined) {
+        getPos();
+    }
+    isCurrentPos = true;
+    isOrigin = false;
+    isDestiny = false;
+    originMarker.remove();
+    originMarker = L.marker([userLat, userLng]).addTo(map);
+} 
+function originActive() {
+    isOrigin = true;
+    isCurrentPos = false;
+    isDestiny = false;
+  }     
+  function DestinyActive() {
+    isDestiny = true;
+    isCurrentPos = false;
+    isOrigin = false;
+  }
+
+function restoreView() {
+    if (userLat == null || userLat == undefined) {
+        map.setView([4.650, -74.172], 16);
+        return;
+    }
+    map.setView([userLat, userLng], 16);
+}
+function clearMap() {
+    latlng1.remove();
+    latlng2.remove();
+    originMarker.remove();
+    destinyMarker.remove();
+    restoreView();
+    actualRoute.remove();
+    document.getElementById("inputPlace1").value="";
+    document.getElementById("inputPlace2").value="";
+}
+
+function getPos() {
+    navigator.geolocation.getCurrentPosition((position) => {
+        userLat = position.coords.latitude;
+        userLng = position.coords.longitude;
+        restoreView();
+    });
+}
