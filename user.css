@@ -14,6 +14,9 @@
                                     
 }
 
+#demo{
+    z-index: 1;
+}
 .navBar{
     width: 110px;
     border: 2px solid rgba(0, 0, 0, 0.267);
@@ -23,7 +26,7 @@
     position: absolute;
     top: 10px;
     left: 8px;
-    z-index: 1000;
+    z-index: 2;
     color: black;
     font-size: 35px;
 }
@@ -43,7 +46,7 @@
 }
 
 .place{
-    z-index: 1000;
+    z-index: 2;
     width: 330px;
     border: 2px solid rgba(0, 0, 0, 0.267);
     height: auto;
@@ -89,8 +92,13 @@
 }
 
 .inputPlace1{
-    margin-bottom: 10px;
+    width: 50%;
 }
+
+.inputPlace2{
+    width: 50%;
+}
+
 
 .place input::placeholder{
     color: black;
@@ -98,10 +106,13 @@
 
 .btnsPlace{
     margin-top: 10px;
-    width: 90%;
+    margin-left: 30px;
+    width: 83%;
     justify-content: space-around;
     position: relative;
     height: 40px;
+    gap: 1em;
+
 }
 
 .btn{
@@ -111,7 +122,8 @@
     cursor: pointer;
     transition: 0.3s;
     color: white;
-    width: 90%;
+    width: 50%;
+    font-size: 13px;
 }
 
 .btnsPlace::before{
@@ -172,10 +184,19 @@
     justify-content: space-around;
 }
 .DestinyPlace {
-    margin-top: 15px;
     align-items: center;
     justify-content: space-around;
     gap: 25px;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+}
+
+.destinyButtons{
+    display: flex;
+    justify-content: space-between;
+    width: 83%;
+    margin-left: 30px;
 }
 .originButtons {
     display: flex;
@@ -183,10 +204,32 @@
     justify-content: end;
     gap: 10px;
 }
-.waypointBtn {
+
+.waypointBtn{
+    height: 100%;
     width: 50px;
-    height: 50px;
-}
+}   
+
+.waypointBtn1{
+    width: 50px;
+} 
+
 #selectDestinyInMap {
     width: 115px;
+}
+
+.navBarButton{
+    border: none;
+    background-color: transparent;
+    font-size: 30px;
+}
+
+.settings{
+   
+    height: 100%;
+    width: 30%;
+   
+    position: absolute;
+    top: 0;
+    left: 0;
 }

@@ -1,10 +1,15 @@
 const profileUser=`
     <header class="navBar container">
         <div class="navItems container">
-            <ion-icon name="filter-outline"></ion-icon>
+            <button id="navBarButton" class="navBarButton container"><ion-icon name="filter-outline"></ion-icon></button>
             <ion-icon name="person-circle-outline"></ion-icon>
         </div>
     </header>
+`
+const hideNav = `
+    <div id="settings" class="settings"> 
+        
+    </div>
 `
 
 const fontMap = `
@@ -15,22 +20,26 @@ const place = `
     <div class="place container">
         <div class="destino container" >
             <h2 class="title">¿A donde iremos hoy?</h2>
-            <div class="OriginPlace">
-            <div class="originButtons">
-	        <button id="current-pos" class="waypointBtn"><i class="fa-solid fa-location-crosshairs"></i></button>
-	        <button id="origin" class="waypointBtn"><i class="fa-solid fa-location-arrow"></i></button>
-            </div>
-            <input id="inputPlace1" class="inputPlace1" placeholder="Origen" required>
+            <div class="OriginPlace">   
+                <div class="originButtons">
+                    <input id="inputPlace1" class="inputPlace1" placeholder="Origen" required>
+                    <button id="current-pos" class="waypointBtn"><i class="fa-solid fa-location-crosshairs"></i></button>
+                    <button id="origin" class="waypointBtn"><i class="fa-solid fa-location-arrow"></i></button>
+                </div>
 	        </div>
+
             <div class="DestinyPlace">
-	        <button id="destiny" class="waypointBtn"><i class="fa-solid fa-location-arrow"></i></button>
-            <input id="inputPlace2" class="inputPlace2" placeholder="Destino" required>
+                <div class="destinyButtons">
+                    <input id="inputPlace2" class="inputPlace2" placeholder="Destino" required>
+                    <button id="destiny" class="waypointBtn1"><i class="fa-solid fa-location-arrow"></i></button>
+                </div>
 	        </div>
+
         </div>
+
         <div class="btnsPlace container">
             <button id="btn1" class="btn blue">Generar Recorrido</button>
-            <button id="finalize-route">Finalize route</button>
-
+            <button id="finalize-route" class="btn red">Finalize route</button>
         </div>
 
     </div>
@@ -42,6 +51,7 @@ function render(documentHTML, innerHTML){
     documentHTML.innerHTML += innerHTML;
 }
 render(document.querySelector("body"),profileUser);
+render(document.querySelector("body"),hideNav);
 render(document.querySelector("body"),fontMap);
 render(document.querySelector("body"),place);
 
