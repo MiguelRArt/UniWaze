@@ -1,4 +1,8 @@
-const profileUser=`
+/**
+ * Representa una sección de encabezado que incluye un botón y un icono de usuario.
+ *
+ */
+const profileUser = `
     <header class="navBar container">
         <div class="navItems container">
             <button id="navBarButton" class="navBarButton container"><ion-icon name="filter-outline"></ion-icon></button>
@@ -6,15 +10,30 @@ const profileUser=`
         </div>
     </header>
 `
+
+/**
+ * Representa un elemento HTML que se utiliza para la navegación del usuario.
+ *
+ */
 const hideNav = `
     <div id="settings" class="settings"> 
         
     </div>
 `
 
+/**
+ * Representa un elemento HTML que se utiliza para contener el futuro mapa de LeafLet.
+ *
+ */
+
 const fontMap = `
     <div id="demo" style="width: 100%; height: 100vh"></div>
 `
+
+/**
+ * Representa un elemento HTML que se utiliza para mostrar un formulario para planificar un recorrido que el usuario quiera realizar.
+ *
+ */
 
 const place = `
     <div class="place container">
@@ -44,6 +63,8 @@ const place = `
 
     </div>
 `
+
+
 
 // Renderizar Codigo
 
