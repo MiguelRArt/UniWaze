@@ -4,10 +4,10 @@
 */
 const profileUser = `
     <header class="navBar container">
-        <div class="navItems container">
+        <form class="navItems container" action="index.php">
             <button id="navBarButton" class="navBarButton container"><ion-icon name="filter-outline"></ion-icon></button>
             <ion-icon name="person-circle-outline"></ion-icon>
-        </div>
+        </form>
     </header>
 `
 
@@ -100,11 +100,12 @@ var map = L.map('demo').setView([4.752231, -74.097953], 5);
 */
 var mapLink =
 '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-L.tileLayer(
-'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-attribution: 'Map data &copy; ' + mapLink,
-maxZoom: 18,
-}).addTo(map);
+L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+    }).addTo(map);
+
+
 
 
 /**

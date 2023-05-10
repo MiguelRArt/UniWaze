@@ -24,7 +24,7 @@
             <input type="text" name="Descripcion" placeholder="Descripcion" required>
             <input id="cords" type="text" name="Coordenadas" placeholder="Coordenadas" required >
             <input type="submit" name="register">            
-        </form>              
+        </form>
     <?php
         include("registrar.php");
         include("mostrar.php");

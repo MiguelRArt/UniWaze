@@ -22,12 +22,12 @@ $inc = include("con_db.php");
 
 <?php
 if($inc){
-    $consulta = "SELECT * FROM datos";
+    $consulta = "SELECT DISTINCT nombre, descripcion, coordenadas FROM datos";
     $resultado = mysqli_query($conex,$consulta);
 
     if($resultado){
         while($row = $resultado->fetch_array()){
-            $id = $row['id'];
+            //$id = $row['id'];
             $nombre = $row['nombre'];
             $descripcion = $row['descripcion'];
             $coordenadas = $row['coordenadas'];                         
