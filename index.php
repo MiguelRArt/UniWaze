@@ -18,7 +18,7 @@
 <body>
     <div id="map"></div>
     
-        <form id="form" action="mostrar.php" method="post">
+        <form id="form" method="post">
             <h1>Reportar Peligro </h1>
             <input type="text" name="Nombre" placeholder="Nombre Del Lugar" required>
             <input type="text" name="Descripcion" placeholder="Descripcion" required>
