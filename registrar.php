@@ -8,7 +8,9 @@ if(isset($_POST['register'])){
         $coordenadas = trim($_POST['Coordenadas']);
         $consulta = "INSERT INTO datos(nombre, descripcion, coordenadas) VALUES ('$nombre','$descripcion',' $coordenadas')";
 
-        $resultado = mysqli_query($conex,$consulta);
+        if ($descripcion != ".") {
+            $resultado = mysqli_query($conex,$consulta);
+        }
 
         if ($resultado) {
             ?> 

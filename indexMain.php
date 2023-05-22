@@ -15,7 +15,6 @@
 </head>
 
 <body>
-	
 	<!-- Leaflet Resources -->
 	<script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
 	<script type="text/javascript" src="leaflet-routing-machine.js"></script>
@@ -29,5 +28,8 @@
 
 	<!-- JS Vanille -->
 	<script src="script.js"></script>
-	<script src="app2.js"></script>
+	<?php
+		require_once('registrar.php');
+		//	require_once('mostrar.php');
+	?>
 </body>
