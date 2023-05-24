@@ -5,12 +5,10 @@
 const profileUser = `
     <header class="navBar container">
         <form class="navItems container" action="index.php">
-            <button id="navBarButton" class="navBarButton container"><ion-icon name="filter-outline"></ion-icon></button>
-            <ion-icon name="person-circle-outline"></ion-icon>
+            <button id="navBarButton" class="navBarButton container"><ion-icon name="filter-outline"></ion-icon></button>           
         </form>
     </header>
 `
-
 
 /**
 @description Variable que contiene una cadena de texto que representa el código HTML de un elemento para ocultar la barra de navegación
@@ -91,7 +89,7 @@ getPos();
 @description Variable que crea un objeto de mapa Leaflet con un identificador "demo" y una vista inicial centrada en Las coordenadas especificadas.
 @type {L.Map}
 */
-var map = L.map('demo').setView([4.752231, -74.097953], 5);
+var map = L.map('demo').setView([4.69841878937995,-74.09008026123048], 12);
 
 
 /**

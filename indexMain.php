@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
-
+	
 <body>
 	
 	<!-- Leaflet Resources -->
@@ -27,7 +27,62 @@
 	<!-- Searcher -->
 	<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
+	<?php
+        include("registrar.php");
+    ?>
+
+	
+
 	<!-- JS Vanille -->
 	<script src="script.js"></script>
 	<script src="app2.js"></script>
+
+	<?php
+        $inc = include("con_db.php");
+    ?>
+
+<script>
+    var map = L.map('map').setView([4.69841878937995,-74.09008026123048], 5);
+
+    googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+    });
+    googleStreets.addTo(map);
+
+    
+</script>
+
+<?php
+if($inc){
+    $consulta = "SELECT DISTINCT nombre, descripcion, coordenadas FROM datos";
+    $resultado = mysqli_query($conex,$consulta);
+
+    if($resultado){
+        while($row = $resultado->fetch_array()){
+            //$id = $row['id'];
+            $nombre = $row['nombre'];
+            $descripcion = $row['descripcion'];
+            $coordenadas = $row['coordenadas'];                         
+            ?>  
+
+            <script>                   
+                var circle = L.circle([<?php echo $coordenadas ?>], {
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.2,
+                    radius: 500
+                }).addTo(map);  
+                circle.bindPopup("<label>Nombre: <?php echo $nombre ?></label><br><label>Descripcion: <?php echo $descripcion ?></label><br><label>Coordenadas: <?php echo $coordenadas ?></label> ");
+            </script>
+            
+                
+            <?php
+        }
+    }
+}
+
+?>
+
+
 </body>

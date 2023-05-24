@@ -26,3 +26,7 @@ if(isset($_POST['register'])){
     }
 }
 ?>
+
+<script>
+    console.log(<?php echo $nombre?>);
+</script>
