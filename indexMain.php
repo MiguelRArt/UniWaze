@@ -32,9 +32,6 @@
     ?>
 
 	
-<!-- asd -->
-
-
 	<!-- JS Vanille -->
 	<script src="script.js"></script>
 	<script src="app2.js"></script>

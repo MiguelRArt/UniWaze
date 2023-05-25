@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
 
 *{
     padding: 0;
@@ -36,6 +37,10 @@ body{
     text-shadow: 1px 1px 1px white;
 }
 
+.navBar a:hover{    
+    filter: drop-shadow(0 0 0.75rem red);
+    text-shadow: 1px 1px 1px red;
+}
 
 .hero{    
     height: 92vh;
@@ -43,9 +48,8 @@ body{
 
 .app {
     height: 92vh;
-    width: 100%;
-    
-    position: relative;
+    width: 100%;    
+    position: relative;   
 }
 
 .contenedor{
@@ -57,9 +61,7 @@ body{
     position: absolute;
     left: 6%;
     flex-direction: column;  
-    transition: all 0.3s; 
-    opacity: 0.6; 
-
+    transition: all 0.3s;
 }
 
 .contenedor:hover .ax{
@@ -70,7 +72,7 @@ body{
 #map{
     height: 300px;
     width: 600px;    
-    transition: all 1s;
+    transition: all 1s; 
     transform: rotateY(40deg);
     border: 2px solid white;
     box-shadow: 1px 1px 10px white;
@@ -97,8 +99,34 @@ body{
     text-decoration: none;
     font-size:50px;
     text-shadow: 1px 1px 1px purple;    
-    align-self: flex-end;
+    align-self: start;
     margin-right: 50px;
     filter: drop-shadow(1px 1px 40px white);
-    transition: all 1s;
+    transition: all 1s; 
 }
+
+.txtApp{
+    width: 580px;
+    height: auto;    
+    position: absolute;
+    right: 10%;  
+    color: white;  
+    top: 40%;
+    border-left: 1px solid rgba(255, 255, 255, 0.39);
+    padding-left: 80px;
+}
+
+.txtApp h3{   
+    font-size: 16px;
+    line-height: 35px;
+    font-family: 'Montserrat', sans-serif;
+    
+}
+
+.txtApp span{
+    color: red;
+    font-size: 34px;
+    font-family: 'Montserrat', sans-serif;
+    filter: drop-shadow(16px 16px 40px red);
+}
+
