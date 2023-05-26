@@ -34,23 +34,12 @@
 	
 	<!-- JS Vanille -->
 	<script src="script.js"></script>
-	<script src="app2.js"></script>
+	
 
 	<?php
         $inc = include("con_db.php");
     ?>
 
-<script>
-    var map = L.map('map').setView([4.69841878937995,-74.09008026123048], 5);
-
-    googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-    });
-    googleStreets.addTo(map);
-
-    
-</script>
 
 <?php
 if($inc){

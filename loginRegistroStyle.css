@@ -48,7 +48,7 @@ form input[type="text"],input[type="password"]{
     font-size: 0.8rem;
 }
 
-form input[type="button"]{
+form input[type="submit"]{
     padding: 10px 20px;
     font-size: 0.8rem;    
     border: none;
@@ -58,7 +58,7 @@ form input[type="button"]{
 }
 
 
-form input[type="button"]:hover{
+form input[type="submit"]:hover{
     background-color:black;
     transition: all 0.3s;
     color: white;

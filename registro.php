@@ -19,7 +19,7 @@
         <input type="password" placeholder="Contraseña" name="Password" required>
         <input type="submit" value="Crear Cuenta" name="btnRegistrar">
         
-        <!-- <a href="uniWaze.html">Regresar</a> -->
+        <a href="uniWaze.html">Regresar</a>
     </form>
     
 </body>
