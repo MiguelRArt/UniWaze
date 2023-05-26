@@ -6,7 +6,7 @@ const profileUser = `
     <header class="navBar container">
         <form class="navItems container" action="index.php">
             <button id="navBarButton" class="navBarButton container"><ion-icon name="filter-outline"></ion-icon></button>   
-            <a href="#"><ion-icon name="filter-outline"></ion-icon></a>                    
+            <a href="uniWaze.html"><ion-icon name="person-circle-outline"></ion-icon></ion-icon></a>            
         </form>
     </header>
 `
