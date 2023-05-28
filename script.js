@@ -4,7 +4,14 @@
 */
 const profileUser = `
     <header class="navBar container">
+<<<<<<< Updated upstream
     <button id="navBarButton" class="navBarButton container"><ion-icon name="filter-outline"></ion-icon></button>
+=======
+        <form class="navItems container" action="index.php">
+            <button id="navBarButton" class="navBarButton container"><ion-icon name="filter-outline"></ion-icon></button>   
+            <a href="userHome.php"><ion-icon name="person-circle-outline"></ion-icon></a>            
+        </form>
+>>>>>>> Stashed changes
     </header>
     `
     // <form class="navItems container" action="index.php">

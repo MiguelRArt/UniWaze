@@ -26,10 +26,52 @@
 	<!-- Searcher -->
 	<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
+<<<<<<< Updated upstream
 	<!-- JS Vanille -->
 	<script src="script.js"></script>
 	<?php
 		require_once('registrar.php');
 		//	require_once('mostrar.php');
 	?>
+=======
+	
+	<!-- JS Vanille -->
+	<script src="script.js"></script>
+
+
+<?php
+require_once('registrar.php');
+$inc = include('con_db.php');
+if($inc){
+    $consulta = "SELECT DISTINCT nombre, descripcion, coordenadas FROM datos";
+    $resultado = mysqli_query($conex,$consulta);
+
+    if($resultado){
+        while($row = $resultado->fetch_array()){
+            //$id = $row['id'];
+            $nombre = $row['nombre'];
+            $descripcion = $row['descripcion'];
+            $coordenadas = $row['coordenadas'];                         
+            ?>  
+
+            <script>                   
+                var circle = L.circle([<?php echo $coordenadas ?>], {
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.2,
+                    radius: 500
+                }).addTo(map);  
+                circle.bindPopup("<label>Nombre: <?php echo $nombre ?></label><br><label>Descripcion: <?php echo $descripcion ?></label><br><label>Coordenadas: <?php echo $coordenadas ?></label> ");
+            </script>
+            
+                
+            <?php
+        }
+    }
+}
+
+?>
+
+
+>>>>>>> Stashed changes
 </body>
