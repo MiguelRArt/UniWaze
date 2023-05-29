@@ -13,9 +13,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
-	
-<body>
-	
+
+<body class="bodyMain">
 	<!-- Leaflet Resources -->
 	<script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
 	<script type="text/javascript" src="leaflet-routing-machine.js"></script>
@@ -27,21 +26,22 @@
 	<!-- Searcher -->
 	<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
+
+	<!-- JS Vanille -->
+	<script src="script.js"></script>
 	<?php
-        include("registrar.php");
-    ?>
+		// require_once('registrar.php');
+	    // require_once('mostrar.php');
+	?>
 
 	
 	<!-- JS Vanille -->
 	<script src="script.js"></script>
-	
-
-	<?php
-        $inc = include("con_db.php");
-    ?>
 
 
 <?php
+require_once('registrar.php');
+$inc = include('con_db.php');
 if($inc){
     $consulta = "SELECT DISTINCT nombre, descripcion, coordenadas FROM datos";
     $resultado = mysqli_query($conex,$consulta);
@@ -71,6 +71,5 @@ if($inc){
 }
 
 ?>
-
 
 </body>

@@ -4,12 +4,19 @@
 */
 const profileUser = `
     <header class="navBar container">
+
         <form class="navItems container" action="index.php">
-            <button id="navBarButton" class="navBarButton container"><ion-icon name="filter-outline"></ion-icon></button>   
-            <a href="uniWaze.html"><ion-icon name="person-circle-outline"></ion-icon></a>            
+            <a href="index.php" id="navBarButton" class="navBarButton container" target="blank"><ion-icon name="warning"></ion-icon></a >   
+            <a href="userHome.php" class="iconF" ><ion-icon name="person-circle-outline"></ion-icon></a>            
+            <a href="uniWaze.html" class="iconF" ><ion-icon name="log-out"></ion-icon></a>            
         </form>
+
     </header>
-`
+    `
+    // <form class="navItems container" action="index.php">
+    //     <button id="navBarButton" class="navBarButton container"><ion-icon name="filter-outline"></ion-icon></button>
+    //     <ion-icon name="person-circle-outline"></ion-icon>
+    // </form>
 
 /**
 @description Variable que contiene una cadena de texto que representa el código HTML de un elemento para ocultar la barra de navegación
@@ -26,7 +33,7 @@ const hideNav = `
 @type {string}
 */
 const fontMap = `
-    <div id="demo" style="width: 100%; height: 100vh"></div>
+    <div id="map" style="width: 100%; height: 100vh"></div>
 `
 
 
@@ -35,7 +42,7 @@ const fontMap = `
 @type {string}
 */
 const place = `
-    <div class="place container">
+    <div class="place container" id="placeContainer">
         <div class="destino container" >
             <h2 class="title">¿A donde iremos hoy?</h2>
             <div class="OriginPlace">   
@@ -62,7 +69,28 @@ const place = `
 
     </div>
 `
-
+/**
+@description Variable que contiene una cadena de texto que representa el código HTML de un formulario y botones de ubicacion para reportar un sitio en el mapa
+@type {string}
+*/
+const reportDiv = `
+    <div id="formReport">
+        <form id="form" method="post">
+            <h1>Reportar Peligro </h1>
+            <input type="text" name="Nombre" placeholder="Nombre Del Lugar" required>
+            <select name="Descripcion" id="Descripcion" required default="Seleccione">
+                <option value=".">Seleccione una opción</option>
+                <option value="Me han robado hace poco en esta zona">Me han robado hace poco en esta zona</option>
+                <option value="Falta de presencia policial en la zona">Falta de presenci-}7.a policial en la zona</option>
+                <option value="Accidentes constantes en esta zona">Accidentes constantes en esta zona</option>
+                <option value="Mala señalización vial">Mala señalización vial</option>
+            </select>
+            <input id="cords" type="text" name="Coordenadas" placeholder="Coordenadas" required >
+            <input type="submit" name="register">            
+        </form>
+            <button id="locationReport" class="waypointBtn1"><i class="fa-solid fa-location-arrow"></i></button>
+    </div>
+    `
 
 /**
 @description Función que recibe una referencia al objeto del documento HTML y una cadena de texto con código HTML para agregarlo al final del cuerpo del documento
@@ -78,6 +106,8 @@ render(document.querySelector("body"),profileUser);
 render(document.querySelector("body"),hideNav);
 render(document.querySelector("body"),fontMap);
 render(document.querySelector("body"),place);
+render(document.querySelector("body"), reportDiv);
+document.getElementById('formReport').style.display = 'none';
 
 
 /**   
@@ -87,10 +117,10 @@ getPos();
 
 
 /**
-@description Variable que crea un objeto de mapa Leaflet con un identificador "demo" y una vista inicial centrada en Las coordenadas especificadas.
+@description Variable que crea un objeto de mapa Leaflet con un identificador "map" y una vista inicial centrada en Las coordenadas especificadas.
 @type {L.Map}
 */
-var map = L.map('demo').setView([4.69841878937995,-74.09008026123048], 12);
+var map = L.map('map').setView([4.752231, -74.097953], 5);
 
 
 /**
@@ -152,17 +182,19 @@ var finalizeBtn = document.getElementById('finalize-route');
 var currentPosBtn = document.getElementById('current-pos');
 var destinyBtn = document.getElementById('destiny');
 var originBtn = document.getElementById('origin');
+var reportBtn = document.getElementById('navBarButton');
+var locationReportBtn = document.getElementById('locationReport');
+let cords= document.getElementById('cords');
+let formulario = document.getElementById("form");
 var isCurrentPos = false;
 var isOrigin = false;
 var isDestiny = false;
+var isReport = false;
 var latlng1= L.marker([0, 0]);
 var latlng2 = L.marker([0, 0]);
 var userLat;
 var userLng;
 var map;
-
-
-// Events
 
 /**
 @description Agrega un evento de click al botón de origen para activar el estado de origen.
@@ -196,7 +228,21 @@ finalizeBtn.addEventListener('click', clearMap);
 */
 currentPosBtn.addEventListener('click', currentPosActive);
 
+/**
+ * @description Agrega evento listener de click al botón de reporte
+ * @event
+ * @param
+ * @returns {void}
+ */
+reportBtn.addEventListener('click', report);
 
+/**
+ * @description Agrega evento listener de click al botón de ubicación de reporte
+ * @event
+ * @param
+ * @returns {void}
+ */
+locationReportBtn.addEventListener('click', isReportMarker);
 
 /**
 @description Marcador en el mapa para el punto de origen.
@@ -209,6 +255,12 @@ var originMarker = L.marker([0, 0]);//4.650, -74.172
 @type {Object}
 */
 var destinyMarker = L.marker([0, 0]);
+
+/**
+@description Marcador en el mapa para el punto de destino.
+@type {Object}
+*/
+var reportMarker = L.marker([0, 0]);
 
 /**
 @description Variable para el objeto de geocodificación del punto de origen.
@@ -230,12 +282,20 @@ var geocoder2
 */
 map.on('click',function (e) {
     if (isOrigin) {
+        console.log('Se registra origen')
         originMarker.remove();
         originMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
     }else if (isDestiny) {
+        console.log('Se registra destino')
         destinyMarker.remove();
         destinyMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
-    }else {
+    }
+    else if (isReport) {
+        console.log('Se registra reporte')
+        reportMarker.remove();
+        reportMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+        cords.setAttribute("value", reportMarker.getLatLng().lat + "," + reportMarker.getLatLng().lng);
+    } else {
         alert('Por favor seleccione qué tipo de punto está escogiendo (Origen o destino)');
     }
 });
@@ -332,4 +392,30 @@ function getPos() {
         userLng = position.coords.longitude;
         restoreView();
     });
+}
+
+/**
+@description Función que obtiene la posición actual del usuario utilizando la API geolocation del navegador
+@function
+@name getPos
+@returns {void}
+*/
+function report() {
+    console.log('Se ha activado el panel de reporte');
+    document.getElementById('placeContainer').style.display = 'none';
+    render(document.querySelector("body"),reportDiv);
+}
+
+/**
+@description Función que obtiene la posición actual del usuario utilizando la API geolocation del navegador
+@function
+@name getPos
+@returns {void}
+*/
+function isReportMarker() {
+    console.log('Se ha detectado un click en el boton de marcador de reporte');
+    isReport = true;
+    isDestiny = false;
+    isOrigin = false;
+    isCurrentPos = false;
 }

@@ -1,33 +1,34 @@
 <?php
 include("con_db.php");
-
 if(isset($_POST['btnRegistrar'])){
     if(strlen($_POST['Usuario']) >= 1 && strlen($_POST['Password']) >= 1) {
         $usuario = trim($_POST['Usuario']);
         $pass = trim($_POST['Password']);        
-        $consulta = "INSERT INTO usuarios(usuario, password) VALUES ('$usuario','$pass')";
-
+        $consulta = "SELECT * FROM usuarios WHERE (usuario = '$usuario' AND password = '$pass');";
+        
+        
         $resultado = mysqli_query($conex,$consulta);
-
-        if ($resultado) {
-            ?> 
-            <script>
-                alert('Registro Exitoso');
-                location.href = 'indexMain.php'
-            </script>"
-            <?php
-        } else {
-            ?>  
-            <script>
-                alert('Ups. Ha ocurrido un error!');
-                location.href = '../registro.php'
+        $num_filas = mysqli_num_rows($resultado);
+        
+        
+        
+        if ($num_filas > 0) {
+            SESSION_START();
+            $fila = mysqli_fetch_assoc($resultado);
+            $_SESSION['fila'] = $fila;
+            //location.href = 'indexMain.php'
+            header('location: indexMain.php');
+            exit;
+        }else {
+            $consulta = "INSERT INTO usuarios(usuario, password) VALUES ('$usuario','$pass');";
+            $resultado = mysqli_query($conex,$consulta);
+            ?>
+             <script>
+             alert('Cuenta creada Exitosamente! :D');
+             location.href = 'indexMain.php'
             </script>"
             <?php
         }
-    }else{
-        ?> 
-        <h3 class="bad">¡Por favor complete los campos!</h3>
-        <?php
     }
 }
 ?>

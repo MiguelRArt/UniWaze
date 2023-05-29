@@ -105,11 +105,10 @@ body::-webkit-scrollbar-thumb{
 }
 
 .bad{
-    color: red;
+    color:white;
     font-family: 'Poppins', sans-serif;
     font-size: 22px;
-    background-color: green;
-    color:white;
+    background-color: red;
     width: 100%;
     position: absolute;
     align-self: center;
@@ -151,7 +150,8 @@ body::-webkit-scrollbar-thumb{
     width: 200px;
 }
 
-.leaflet-top{   
+.leaflet-top{
+    position: absolute;
     bottom: 0;
 }
 

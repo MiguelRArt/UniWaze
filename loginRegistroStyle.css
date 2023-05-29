@@ -77,3 +77,10 @@ form a:hover{
     transition: all 0.3s;
 }
 
+
+p{
+    color:black;
+    font-weight: 600;
+    font-size: 14px;
+    font-style: italic;
+}
