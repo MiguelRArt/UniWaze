@@ -24,8 +24,8 @@ if(isset($_POST['btnRegistrar'])){
             $resultado = mysqli_query($conex,$consulta);
             ?>
              <script>
-             alert('Por favor confirma tus credenciales! :D');
-             location.href = '../registro.php'
+             alert('Cuenta creada Exitosamente! :D');
+             location.href = 'indexMain.php'
             </script>"
             <?php
         }

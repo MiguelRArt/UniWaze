@@ -29,10 +29,17 @@
     z-index: 2;
     color: black;
     font-size: 35px;
+    
 }
 
+.bodyMain{
+    height: 100vh;
+    width: 100%;
+}
 .navItems{
+    display: flex;
     gap: 10px;
+    flex-direction: row;
 }
 
 .navItems ion-icon{
@@ -361,7 +368,14 @@ body::-webkit-scrollbar-thumb{
     background-color: #f2f2f2;
     width: 200px;
 }
+    
+.iconF{
+    font-size: 34px;
+    width: 34px;
+    height: 34px;
+    color: black;
+}
 
-.leaflet-top{
-    bottom: 0;
+.navBarButton{
+    color: black;
 }

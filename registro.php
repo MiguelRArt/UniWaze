@@ -20,7 +20,7 @@
         <input type="submit" value="Crear Cuenta" name="btnRegistrar">
         <a href="uniWaze.html">Regresar</a>
         <p>Si no tiene una cuenta, esta se creará automáticamente</p>
-    </form>
+    </form>     
     
 </body>
 </html>

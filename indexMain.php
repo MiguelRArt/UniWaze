@@ -14,7 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 
-<body>
+<body class="bodyMain">
 	<!-- Leaflet Resources -->
 	<script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
 	<script type="text/javascript" src="leaflet-routing-machine.js"></script>
@@ -26,14 +26,14 @@
 	<!-- Searcher -->
 	<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
-<<<<<<< Updated upstream
+
 	<!-- JS Vanille -->
 	<script src="script.js"></script>
 	<?php
-		require_once('registrar.php');
-		//	require_once('mostrar.php');
+		// require_once('registrar.php');
+	    // require_once('mostrar.php');
 	?>
-=======
+
 	
 	<!-- JS Vanille -->
 	<script src="script.js"></script>
@@ -72,6 +72,4 @@ if($inc){
 
 ?>
 
-
->>>>>>> Stashed changes
 </body>

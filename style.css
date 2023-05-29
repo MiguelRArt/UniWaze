@@ -150,5 +150,6 @@ body::-webkit-scrollbar-thumb{
 }
 
 .leaflet-top{
+    position: absolute  ;
     bottom: 0;
 }

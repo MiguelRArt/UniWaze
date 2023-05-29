@@ -19,6 +19,7 @@
     <div id="map"></div>
         <form id="form" method="post">
             <h1>Reportar Peligro </h1>
+            <a href="indexMain.php">Regresar</a>
             <input type="text" name="Nombre" placeholder="Nombre Del Lugar" required>
             <select name="Descripcion" id="Descripcion" required default="Seleccione">
                 <option value=".">Seleccione una opción</option>
@@ -28,9 +29,10 @@
                 <option value="Mala señalización vial">Mala señalización vial</option>
             </select>
             <input id="cords" type="text" name="Coordenadas" placeholder="Coordenadas" required >
-            <input type="submit" name="register">            
+            <input type="submit" name="register">
+            
         </form>
-
+        
     <?php
         include("registrar.php");
         include("mostrar.php");
